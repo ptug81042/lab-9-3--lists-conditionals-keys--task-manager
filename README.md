@@ -15,22 +15,26 @@ https://golden-pithivier-5277c1.netlify.app/
 
 ### App.tsx
 - The main component that manages the overall application state.
-- Handles task data, status updates, deletion, and filtering logic.
-- Composes the `TaskFilter` and `TaskList` components.
+- Handles task data, status updates, deletion, filtering, sorting, and user-added tasks.
+- Composes the `TaskFilter`, `TaskList`, and optional `AddTaskForm` components.
 
 ### TaskList.tsx
 - Renders a list of task items using the `TaskItem` component.
 - Applies conditional rendering to handle cases where no tasks are available.
-- Uses unique keys for efficient rendering.
+- Includes sorting functionality and passes event handlers to control task order and movement.
 
 ### TaskItem.tsx
 - Displays individual task details such as title, description, status, priority, and due date.
-- Provides functionality to change a task's status or delete it.
+- Provides functionality to change a task's status, delete the task, or move it up/down in the list.
 - Applies visual indicators and styling based on task properties.
 
 ### TaskFilter.tsx
 - Provides dropdown selectors to filter tasks by status and priority.
 - Triggers callbacks to inform the parent component of selected filters.
+
+### AddTaskForm.tsx (Optional Feature)
+- Provides input fields and a submit button for adding new tasks.
+- Controlled component that lifts state to the `App.tsx` level on submit.
 
 ### types/index.ts
 - Contains all shared TypeScript types and interfaces.
@@ -61,6 +65,16 @@ Ensuring clear fallback behavior (e.g., displaying "No tasks to display") requir
 - Visual styling and layout based on task properties
 - Component-driven architecture for reusability and clarity
 - Responsive layout and accessibility-aware practices
+
+---
+
+## One Step Further (Optional Enhancements)
+
+The following advanced features were added for extended practice:
+
+- Sort tasks by due date using a dedicated button in the `TaskList` component.
+- Add new tasks dynamically via a controlled form component.
+- Reorder tasks using "Move Up" and "Move Down" buttons within each task card.
 
 ---
 
