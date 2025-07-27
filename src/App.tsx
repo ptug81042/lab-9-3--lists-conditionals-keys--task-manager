@@ -23,6 +23,14 @@ function App() {
       priority: 'medium',
       dueDate: '2025-07-30',
     },
+    {
+      id: '3',
+      title: 'Submit Weekly Report',
+      description: 'Upload the status report to the team drive',
+      status: 'completed',
+      priority: 'low',
+      dueDate: '2025-07-25',
+    },
   ]);
 
   const [filters, setFilters] = useState<{
