@@ -1,19 +1,25 @@
 import { type TaskItemProps, type TaskStatus } from '../../types';
+import './TaskItem.css';
 
 export default function TaskItem({
   task,
   onStatusChange,
   onDelete,
   onMoveUp,
-  onMoveDown
+  onMoveDown,
 }: TaskItemProps) {
   return (
-    <div className={`task-item priority-${task.priority}`}>
-      <h3>{task.title}</h3>
+    <div className={`task-item status-${task.status}`}>
+      <h3>
+        {task.title}
+        <span className={`priority-badge priority-${task.priority}`}>
+          {task.priority}
+        </span>
+      </h3>
+
       <p>{task.description}</p>
-      <p>Due: {task.dueDate}</p>
+      <p className="due-date">Due: {task.dueDate}</p>
       <p>Status: {task.status}</p>
-      <p>Priority: {task.priority}</p>
 
       <select
         value={task.status}
