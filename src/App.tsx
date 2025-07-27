@@ -1,54 +1,47 @@
 import { useState } from 'react';
-import './App.css';
 import TaskList from './components/TaskList/TaskList';
 import TaskFilter from './components/TaskFilter/TaskFilter';
-import { type Task, type TaskStatus } from './types';
 import AddTaskForm from './components/AddTaskForm/AddTaskForm';
-
-const initialTasks: Task[] = [
-  {
-    id: '1',
-    title: 'Buy groceries',
-    description: 'Milk, Bread, Eggs',
-    status: 'pending',
-    priority: 'medium',
-    dueDate: '2025-08-01'
-  },
-  {
-    id: '2',
-    title: 'Finish project report',
-    description: 'Finalize charts and submit',
-    status: 'in-progress',
-    priority: 'high',
-    dueDate: '2025-08-03',
-  },
-  {
-    id: '3',
-    title: 'Workout',
-    description: '45-minute run and stretching',
-    status: 'completed',
-    priority: 'low',
-    dueDate: '2025-07-27',
-  },
-];
+import { Task, TaskStatus } from './types';
+import './App.css';
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [tasks, setTasks] = useState<Task[]>([
+    {
+      id: '1',
+      title: 'Finish React Lab',
+      description: 'Complete Lab 9.3 assignment',
+      status: 'pending',
+      priority: 'high',
+      dueDate: '2025-08-01',
+    },
+    {
+      id: '2',
+      title: 'Review TypeScript',
+      description: 'Go over interfaces and types',
+      status: 'in-progress',
+      priority: 'medium',
+      dueDate: '2025-07-30',
+    },
+  ]);
+
   const [filters, setFilters] = useState<{
     status?: TaskStatus;
     priority?: 'low' | 'medium' | 'high';
   }>({});
+
   const [showForm, setShowForm] = useState(false);
 
   const handleStatusChange = (taskId: string, newStatus: TaskStatus) => {
-    const updated = tasks.map((task) =>
-      task.id === taskId ? { ...task, status: newStatus } : task);
-    setTasks(updated);
+    const updatedTasks = tasks.map(task =>
+      task.id === taskId ? { ...task, status: newStatus } : task
+    );
+    setTasks(updatedTasks);
   };
 
   const handleDelete = (taskId: string) => {
-    const updated = tasks.filter((task) => task.id !== taskId);
-    setTasks(updated);
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(updatedTasks);
   };
 
   const handleFilterChange = (newFilters: {
@@ -58,56 +51,56 @@ function App() {
     setFilters(newFilters);
   };
 
-  const filteredTasks = tasks.filter((task) => {
-    const statusMatch = filters.status ? task.status === filters.status : true;
-    const priorityNatch = filters.priority
-      ? task.priority === filters.priority 
-      : true;
-    return statusMatch && priorityNatch;
-  });
-
   const handleSortByDate = () => {
-    setTasks(prevTasks => [
-      ...prevTasks].sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime())
+    const sorted = [...tasks].sort((a, b) =>
+      new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
     );
+    setTasks(sorted);
   };
 
-  const handleAddTask = (task: Task) => {
-    setTasks([task, ...tasks]);
+  const handleAddTask = (newTask: Task) => {
+    setTasks([...tasks, newTask]);
     setShowForm(false);
   };
 
-    const handleMoveUp = (taskId: string) => {
-    setTasks((prev) => {
-      const index = prev.findIndex((task) => task.id === taskId);
-      if (index > 0) {
-        const updated = [...prev];
-        [updated[index - 1], updated[index]] = [updated[index], updated[index - 1]];
-        return updated;
-      }
-      return prev;
-    });
+  const handleMoveUp = (taskId: string) => {
+    const index = tasks.findIndex(task => task.id === taskId);
+    if (index > 0) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index - 1], updatedTasks[index]] = [
+        updatedTasks[index],
+        updatedTasks[index - 1],
+      ];
+      setTasks(updatedTasks);
+    }
   };
 
   const handleMoveDown = (taskId: string) => {
-    setTasks((prev) => {
-      const index = prev.findIndex((task) => task.id === taskId);
-      if (index < prev.length - 1) {
-        const updated = [...prev];
-        [updated[index], updated[index + 1]] = [updated[index + 1], updated[index]];
-        return updated;
-      }
-      return prev;
-    });
+    const index = tasks.findIndex(task => task.id === taskId);
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index + 1], updatedTasks[index]] = [
+        updatedTasks[index],
+        updatedTasks[index + 1],
+      ];
+      setTasks(updatedTasks);
+    }
   };
 
+  const filteredTasks = tasks.filter(task => {
+    const matchStatus = !filters.status || task.status === filters.status;
+    const matchPriority = !filters.priority || task.priority === filters.priority;
+    return matchStatus && matchPriority;
+  });
 
   return (
-    <div className="app">
-      <h1 className="app-title">📝 Task Manager</h1>
+    <div className="App">
+      <h1>Task Manager</h1>
+
       <TaskFilter onFilterChange={handleFilterChange} />
-      <button onClick={() => setShowForm(!showForm)}>
-        {showForm ? 'cancel' : 'Add New Task'}
+
+      <button onClick={() => setShowForm(prev => !prev)}>
+        {showForm ? 'Cancel' : 'Add New Task'}
       </button>
 
       {showForm && <AddTaskForm onAdd={handleAddTask} />}
