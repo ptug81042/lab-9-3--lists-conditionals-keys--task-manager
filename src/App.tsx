@@ -2,7 +2,8 @@ import { useState } from 'react';
 import './App.css';
 import TaskList from './components/TaskList/TaskList';
 import TaskFilter from './components/TaskFilter/TaskFilter';
-import { type Task, type TaskStatus } from './types'
+import { type Task, type TaskStatus } from './types';
+import AddTaskForm from './components/AddTaskForm/AddTaskForm';
 
 const initialTasks: Task[] = [
   {
@@ -71,6 +72,11 @@ function App() {
     );
   };
 
+  const handleAddTask = (task: Task) => {
+    setTasks([task, ...tasks]);
+    setShowForm(false);
+  };
+
   return (
     <div className="app">
       <h1 className="app-title">📝 Task Manager</h1>
@@ -78,6 +84,9 @@ function App() {
       <button onClick={() => setShowForm(!showForm)}>
         {showForm ? 'cancel' : 'Add New Task'}
       </button>
+
+      {showForm && <AddTaskForm onAdd={handleAddTask} />}
+
       <TaskList
         tasks={filteredTasks}
         onStatusChange={handleStatusChange}
