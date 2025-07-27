@@ -64,6 +64,12 @@ function App() {
     return statusMatch && priorityNatch;
   });
 
+  const handleSortByDate = () => {
+    setTasks(prevTasks => [
+      ...prevTasks].sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime())
+    );
+  };
+
   return (
     <div className="app">
       <h1 className="app-title">📝 Task Manager</h1>
@@ -72,6 +78,7 @@ function App() {
         tasks={filteredTasks}
         onStatusChange={handleStatusChange}
         onDelete={handleDelete}
+        onSortByDate={handleSortByDate}
       />
     </div>
   );

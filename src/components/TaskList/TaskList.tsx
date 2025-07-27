@@ -2,9 +2,10 @@ import './TaskList.css';
 import TaskItem from '../TaskItem/TaskItem';
 import {type TaskListProps } from '../../types';
 
-function TaskList({ tasks, onStatusChange, onDelete }: TaskListProps) {
+function TaskList({ tasks, onStatusChange, onDelete, onSortByDate }: TaskListProps) {
   return (
     <div className="task-list">
+      <button onClick={onSortByDate} className='sort-button'>Sort by Due Date</button>
       {tasks.length === 0 ? (
         <p className="empty">No tasks to display.</p>
       ) : (
