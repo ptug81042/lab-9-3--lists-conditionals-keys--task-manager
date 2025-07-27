@@ -37,6 +37,7 @@ function App() {
     status?: TaskStatus;
     priority?: 'low' | 'medium' | 'high';
   }>({});
+  const [showForm, setShowForm] = useState(false);
 
   const handleStatusChange = (taskId: string, newStatus: TaskStatus) => {
     const updated = tasks.map((task) =>
@@ -74,6 +75,9 @@ function App() {
     <div className="app">
       <h1 className="app-title">📝 Task Manager</h1>
       <TaskFilter onFilterChange={handleFilterChange} />
+      <button onClick={() => setShowForm(!showForm)}>
+        {showForm ? 'cancel' : 'Add New Task'}
+      </button>
       <TaskList
         tasks={filteredTasks}
         onStatusChange={handleStatusChange}
