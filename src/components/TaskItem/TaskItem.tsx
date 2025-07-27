@@ -1,4 +1,3 @@
-import React from 'react';
 import { type TaskItemProps, type TaskStatus } from '../../types';
 
 export default function TaskItem({
