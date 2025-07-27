@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TaskList from './components/TaskList/TaskList';
 import TaskFilter from './components/TaskFilter/TaskFilter';
 import AddTaskForm from './components/AddTaskForm/AddTaskForm';
-import { Task, TaskStatus } from './types';
+import { type Task, type TaskStatus } from './types';
 import './App.css';
 
 function App() {
