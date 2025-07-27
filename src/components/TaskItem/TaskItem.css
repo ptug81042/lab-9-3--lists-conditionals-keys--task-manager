@@ -1,0 +1,49 @@
+.task-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background-color: #fafafa;
+    transition: box-shadow 0.3s ease;
+}
+
+.task-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.task-item.low {
+    border-left: 6px solid green;
+}
+
+.task-item.medium {
+    border-left: 6px solid orange;
+}
+
+.task-item.high {
+    border-left: 6px solid red;
+}
+
+button {
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.urgent {
+    margin-top: 0.5rem;
+    color: red;
+    font-weight: bold;
+}
