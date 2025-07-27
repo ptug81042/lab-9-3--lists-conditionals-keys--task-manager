@@ -1,69 +1,78 @@
-# React + TypeScript + Vite
+# Task Manager App – Lab 9.3
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Task Manager application built using React and TypeScript with Vite. It demonstrates the use of lists, keys, and conditional rendering in a structured component-based architecture.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
 
-## Expanding the ESLint configuration
+View the deployed project here:  
+https://golden-pithivier-5277c1.netlify.app/
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Project Structure and Component Overview
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### App.tsx
+- The main component that manages the overall application state.
+- Handles task data, status updates, deletion, and filtering logic.
+- Composes the `TaskFilter` and `TaskList` components.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### TaskList.tsx
+- Renders a list of task items using the `TaskItem` component.
+- Applies conditional rendering to handle cases where no tasks are available.
+- Uses unique keys for efficient rendering.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### TaskItem.tsx
+- Displays individual task details such as title, description, status, priority, and due date.
+- Provides functionality to change a task's status or delete it.
+- Applies visual indicators and styling based on task properties.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### TaskFilter.tsx
+- Provides dropdown selectors to filter tasks by status and priority.
+- Triggers callbacks to inform the parent component of selected filters.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### types/index.ts
+- Contains all shared TypeScript types and interfaces.
+- Ensures type-safe component props and state structures.
+
+---
+
+## Reflection Questions
+
+**1. How did you ensure unique keys for your list items?**  
+Each task uses a unique `id` string as the key when rendered inside the `TaskList` component. This ensures predictable rendering behavior and allows React to manage list updates efficiently.
+
+**2. What considerations did you make when implementing the filtering functionality?**  
+Filtering logic was implemented in a type-safe way using defined union types. Empty string values are converted to `undefined` before filtering. This approach ensures both user flexibility and consistency with the type system.
+
+**3. How did you handle state updates for task status changes?**  
+Status updates are handled by passing a callback (`onStatusChange`) from `App.tsx` to each `TaskItem`. When invoked, the task list is updated immutably using the `.map()` function, and the updated list is stored in state.
+
+**4. What challenges did you face when implementing conditional rendering?**  
+Ensuring clear fallback behavior (e.g., displaying "No tasks to display") required careful condition checks. Additionally, styling task cards based on dynamic properties like status and priority involved structuring CSS and JSX to be both readable and reusable.
+
+---
+
+## Features
+
+- Fully typed with TypeScript for reliable component interaction
+- Status and priority-based task filtering
+- Visual styling and layout based on task properties
+- Component-driven architecture for reusability and clarity
+- Responsive layout and accessibility-aware practices
+
+---
+
+## Built With
+
+- React
+- TypeScript
+- Vite
+- Netlify (for deployment)
+
+---
+
+## License
+
+This project was completed for educational purposes as part of Lab 9.3.
