@@ -14,31 +14,55 @@ https://golden-pithivier-5277c1.netlify.app/
 ## Project Structure and Component Overview
 
 ### App.tsx
-- The main component that manages the overall application state.
-- Handles task data, status updates, deletion, filtering, sorting, and user-added tasks.
-- Composes the `TaskFilter`, `TaskList`, and optional `AddTaskForm` components.
+- The main component that manages the overall application state.  
+- Handles task data, status updates, deletion, filtering, sorting, and task movement logic.  
+- Composes the `TaskFilter`, `TaskList`, and `AddTaskForm` components.
 
 ### TaskList.tsx
-- Renders a list of task items using the `TaskItem` component.
-- Applies conditional rendering to handle cases where no tasks are available.
-- Includes sorting functionality and passes event handlers to control task order and movement.
+- Renders a list of task items using the `TaskItem` component.  
+- Applies conditional rendering to handle cases where no tasks are available.  
+- Supports sorting tasks by due date.
 
 ### TaskItem.tsx
-- Displays individual task details such as title, description, status, priority, and due date.
-- Provides functionality to change a task's status, delete the task, or move it up/down in the list.
+- Displays individual task details such as title, description, status, priority, and due date.  
+- Provides functionality to change a task's status, delete it, and move it up or down in the list.  
 - Applies visual indicators and styling based on task properties.
 
 ### TaskFilter.tsx
-- Provides dropdown selectors to filter tasks by status and priority.
+- Provides dropdown selectors to filter tasks by status and priority.  
 - Triggers callbacks to inform the parent component of selected filters.
 
-### AddTaskForm.tsx (Optional Feature)
-- Provides input fields and a submit button for adding new tasks.
-- Controlled component that lifts state to the `App.tsx` level on submit.
+### AddTaskForm.tsx
+- A controlled form component for adding new tasks.  
+- Collects task details including title, description, status, priority, and due date.
 
 ### types/index.ts
-- Contains all shared TypeScript types and interfaces.
+- Contains all shared TypeScript types and interfaces.  
 - Ensures type-safe component props and state structures.
+
+---
+
+## Visual Indicators and Styling
+
+- **Status-based Styling:**  
+  Each task displays a colored left border indicating its status:  
+  - **Pending:** Orange border (`#f39c12`) — indicates tasks that are waiting to be started.  
+  - **In Progress:** Blue border (`#3498db`) — shows tasks currently being worked on.  
+  - **Completed:** Green border (`#2ecc71`) — marks tasks that are finished; these tasks also have reduced opacity and strikethrough text to visually signify completion.
+
+- **Priority Indicators:**  
+  Tasks have colored badges and background shading to reflect priority levels:  
+  - **Low Priority:** Green badge and soft green background (`#4caf50`, `#e8f5e9`) — implies less urgent tasks that can be addressed later.  
+  - **Medium Priority:** Orange badge and light orange background (`#ff9800`, `#fff3e0`) — indicates tasks that require attention but are not critical.  
+  - **High Priority:** Red badge and light red background (`#f44336`, `#ffebee`) — highlights urgent tasks needing immediate focus.
+
+- **Interactivity:**  
+  Hovering over a task item increases shadow and highlights the border to improve visual focus. Active states provide tactile feedback with subtle color changes.
+
+- **Buttons:**  
+  Action buttons (Move Up, Move Down, Delete) change background colors on hover and active states for usability.
+
+These visual cues improve user experience by making task status and priority immediately recognizable and enhancing the interface’s responsiveness.
 
 ---
 
@@ -60,33 +84,26 @@ Ensuring clear fallback behavior (e.g., displaying "No tasks to display") requir
 
 ## Features
 
-- Fully typed with TypeScript for reliable component interaction
-- Status and priority-based task filtering
-- Visual styling and layout based on task properties
-- Component-driven architecture for reusability and clarity
+- Fully typed with TypeScript for reliable component interaction  
+- Status and priority-based task filtering  
+- Visual styling and layout based on task properties  
+- Sorting tasks by due date  
+- Adding new tasks with a form  
+- Moving tasks up and down the list  
+- Component-driven architecture for reusability and clarity  
 - Responsive layout and accessibility-aware practices
-
----
-
-## One Step Further (Optional Enhancements)
-
-The following advanced features were added for extended practice:
-
-- Sort tasks by due date using a dedicated button in the `TaskList` component.
-- Add new tasks dynamically via a controlled form component.
-- Reorder tasks using "Move Up" and "Move Down" buttons within each task card.
 
 ---
 
 ## Built With
 
-- React
-- TypeScript
-- Vite
+- React  
+- TypeScript  
+- Vite  
 - Netlify (for deployment)
 
 ---
 
 ## License
 
-This project was completed for educational purposes as part of Lab 9.3.
+This project was completed for educational purposes as part of Lab 9.
