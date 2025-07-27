@@ -1,49 +1,113 @@
 .task-item {
-    border: 1px solid #ddd;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    background-color: #fff;
     border-radius: 8px;
-    background-color: #fafafa;
+    padding: 12px 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.task-item:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.task-item:hover,
+.task-item:focus-within {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.task-item.low {
-    border-left: 6px solid green;
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.task-item.medium {
-    border-left: 6px solid orange;
+.task-title {
+    font-size: 1.2rem;
+    margin: 0;
 }
 
-.task-item.high {
-    border-left: 6px solid red;
+.task-desc {
+    margin: 0;
+    color: #444;
+    font-size: 1rem;
 }
 
-button {
-    margin-top: 0.5rem;
-    padding: 0.4rem 0.8rem;
+.task-due-date {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.task-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-select {
+    padding: 4px 8px;
     border-radius: 4px;
-    border: none;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
     cursor: pointer;
-    font-weight: 600;
-    margin-right: 0.5rem;
+    background-color: white;
+    transition: border-color 0.3s ease;
 }
 
-button:hover {
-    opacity: 0.85;
+.status-select:hover,
+.status-select:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 .delete-btn {
-    background-color: #ff4d4d;
-    color: white;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
 }
 
-.urgent {
-    margin-top: 0.5rem;
-    color: red;
-    font-weight: bold;
+.delete-btn:hover {
+    color: #dc3545;
+}
+
+.delete-btn:active {
+    transform: scale(0.9);
+}
+
+/* Priority badge styling */
+.badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    user-select: none;
+    text-transform: uppercase;
+}
+
+.priority-low {
+    background-color: #28a745;
+}
+
+.priority-medium {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.priority-high {
+    background-color: #dc3545;
+}
+
+/* Status-based styling for task-item background or border */
+.status-pending {
+    border-left: 4px solid #ffc107;
+}
+
+.status-in-progress {
+    border-left: 4px solid #17a2b8;
+}
+
+.status-completed {
+    border-left: 4px solid #28a745;
 }
