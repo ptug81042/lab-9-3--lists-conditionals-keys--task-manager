@@ -8,13 +8,12 @@ export default function TaskItem({
   onMoveDown
 }: TaskItemProps) {
   return (
-    <div className={`task-item ${task.status} ${task.priority}`}>
+    <div className={`task-item priority-${task.priority}`}>
       <h3>{task.title}</h3>
       <p>{task.description}</p>
       <p>Due: {task.dueDate}</p>
       <p>Status: {task.status}</p>
-      <p className={`task-priority-${task.priority}`}>Priority: {task.priority}</p>
-
+      <p>Priority: {task.priority}</p>
 
       <select
         value={task.status}
