@@ -13,7 +13,8 @@ export default function TaskItem({
       <p>{task.description}</p>
       <p>Due: {task.dueDate}</p>
       <p>Status: {task.status}</p>
-      <p>Priority: {task.priority}</p>
+      <p className={`task-priority-${task.priority}`}>Priority: {task.priority}</p>
+
 
       <select
         value={task.status}
