@@ -14,12 +14,16 @@ export interface TaskListProps {
     onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
     onDelete: (taskId: string) => void;
     onSortByDate: () => void;
+    onMoveUp: (taskId: string) => void;
+    onMoveDown: (taskId: string) => void;
 }
 
 export interface TaskItemProps {
     task: Task;
     onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
     onDelete: (taskId: string) => void;
+    onMoveUp: (taskId: string) => void;
+    onMoveDown: (taskId: string) => void;
 }
 
 export interface TaskFilterProps {

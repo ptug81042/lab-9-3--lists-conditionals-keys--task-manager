@@ -77,6 +77,31 @@ function App() {
     setShowForm(false);
   };
 
+    const handleMoveUp = (taskId: string) => {
+    setTasks((prev) => {
+      const index = prev.findIndex((task) => task.id === taskId);
+      if (index > 0) {
+        const updated = [...prev];
+        [updated[index - 1], updated[index]] = [updated[index], updated[index - 1]];
+        return updated;
+      }
+      return prev;
+    });
+  };
+
+  const handleMoveDown = (taskId: string) => {
+    setTasks((prev) => {
+      const index = prev.findIndex((task) => task.id === taskId);
+      if (index < prev.length - 1) {
+        const updated = [...prev];
+        [updated[index], updated[index + 1]] = [updated[index + 1], updated[index]];
+        return updated;
+      }
+      return prev;
+    });
+  };
+
+
   return (
     <div className="app">
       <h1 className="app-title">📝 Task Manager</h1>
@@ -92,6 +117,8 @@ function App() {
         onStatusChange={handleStatusChange}
         onDelete={handleDelete}
         onSortByDate={handleSortByDate}
+        onMoveUp={handleMoveUp}
+        onMoveDown={handleMoveDown}
       />
     </div>
   );
